@@ -27,11 +27,8 @@ async function responseHandler(userResponse, sendMessage, chatId) {
 				await data.save();
 				return await sendMessage(chatId, messages.peopleCount);
 			}
-			if (data.peopleData.length < data.numberOfPeople) {
-				return;
-			}
 
-			return;
+			return sendMessage(chatId, "You are all set!");
 		}
 
 		const newUser = new Data({
@@ -79,6 +76,7 @@ async function responseHandler(userResponse, sendMessage, chatId) {
 	if (data.previousMessage === "age") {
         //get age from user response
 		data.peopleData[data.activeIndex].age = userResponse;
+
 		const message = messages.gender + `${data.activeIndex + 1}`;
 		const activeIndex = data.activeIndex + 1;
 		data.activeIndex++;
@@ -91,6 +89,8 @@ async function responseHandler(userResponse, sendMessage, chatId) {
 	if (data.previousMessage === "end") {
 		return await sendMessage(chatId, "Thank you for your time!");
 	}
+
+	return await sendMessage(chatId, "Please enter a valid response");
 }
 
 module.exports = responseHandler;
