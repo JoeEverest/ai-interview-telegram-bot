@@ -33,6 +33,10 @@ const sendMessage = async (chatId, text) => {
 	});
 };
 
+app.get("/", (req, res) => {
+	res.send("It works!");
+})
+
 app.post(URI, async (req, res) => {
 	const { message } = req.body;
 	const chatId = message.chat.id;
