@@ -27,16 +27,14 @@ async function init() {
 }
 
 const sendMessage = async (chatId, text) => {
-	return await axios.post(`${TELEGRAM_API}/sendMessage`, {
+	await axios.post(`${TELEGRAM_API}/sendMessage`, {
 		chat_id: chatId,
 		text,
 	});
 };
 
-app.get("/", async (req, res) => {
-	const response = await init();
-
-	res.send(JSON.stringify({message:"It works!", response}));
+app.get("/", (req, res) => {
+	res.send("It works!");
 })
 
 app.post(URI, async (req, res) => {
@@ -44,7 +42,10 @@ app.post(URI, async (req, res) => {
 	const chatId = message.chat.id;
 	const text = message.text;
 
-	await responseHandler(text, sendMessage, chatId);
+	// await responseHandler(text, sendMessage, chatId);
+	console.log('====================================');
+	console.log(chatId, text);
+	console.log('====================================');
 
 	res.status(200).end();
 });
