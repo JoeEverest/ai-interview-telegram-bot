@@ -42,6 +42,10 @@ app.post(URI, async (req, res) => {
 	const chatId = message.chat.id;
 	const text = message.text;
 
+	console.log('====================================');
+	console.log(chatId,text, message);
+	console.log('====================================');
+
 	await responseHandler(text, sendMessage, chatId);
 
 	res.status(200).end();
